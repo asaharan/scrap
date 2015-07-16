@@ -14,7 +14,7 @@ def find_address(comment):
 
 def fetch(roll_no):
 	url='http://oa.cc.iitk.ac.in:8181/Oa/Jsp/OAServices/IITk_SrchRes1.jsp?typ=stud&numtxt='+str(roll_no)+'&sbm=Y'
-	print 'Fetching %s for \n %s' % (url,roll_no)
+	print 'Fetching info for %s' % (roll_no)
 	page = requests.get(url)
 
 	page_text=page.text.strip()
