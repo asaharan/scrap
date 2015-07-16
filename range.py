@@ -20,7 +20,8 @@ roll_no=start_roll_no
 
 start = timeit.default_timer()
 while roll_no<=last_roll_no:
-	data[roll_no]=main.fetch(roll_no)
+	if main.fetch(roll_no):
+		data[roll_no]=main.fetch(roll_no)
 	roll_no+=1
 
 stop = timeit.default_timer()
