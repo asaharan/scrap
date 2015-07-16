@@ -2,7 +2,7 @@ import main
 import json
 
 json_file=open('data.json','w')
-# html_file=open('ss.html','w')
+
 start_roll_no=input('Enter first roll no:')
 last_roll_no=input('Enter last roll no:')
 data={}

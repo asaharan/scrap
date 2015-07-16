@@ -2,6 +2,7 @@ from lxml import html
 import requests
 import re
 
+notavailable='Not available'
 
 def find_address(comment):
 	m=re.search('<b>Permanent Address :</b>(.*)India<br>',comment)
@@ -34,13 +35,40 @@ def fetch(roll_no):
 
 
 	data={}
-	data['n']=name[1].strip()
-	data['p']=program[1].strip()
-	data['d']=department[1].strip()
-	data['h']=hostel[1].strip()
-	data['e']=str(email[0].strip())[:-11]
-	data['b']=blood[1].strip()
-	data['g']=gender[1].strip()
-	data['c']=addrsss['c']
-	data['s']=addrsss['s']
+	try:
+		data['n']=name[1].strip()
+	except Exception, e:
+		data['n']=notavailable
+	try:
+		data['p']=program[1].strip()
+	except Exception, e:
+		data['p']=notavailable
+	try:
+		data['d']=department[1].strip()
+	except Exception, e:
+		data['d']=notavailable
+	try:
+		data['h']=hostel[1].strip()
+	except Exception, e:
+		data['h']=notavailable
+	try:
+		data['e']=str(email[0].strip())[:-11]
+	except Exception, e:
+		data['e']=notavailable
+	try:
+		data['b']=blood[1].strip()
+	except Exception, e:
+		data['b']=notavailable
+	try:
+		data['g']=gender[1].strip()
+	except Exception, e:
+		data['g']=notavailable
+	try:
+		data['c']=addrsss['c']
+	except Exception, e:
+		data['c']=notavailable
+	try:
+		data['s']=addrsss['s']
+	except Exception, e:
+		data['s']=notavailable
 	return data
