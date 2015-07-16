@@ -30,11 +30,6 @@ def fetch(roll_no):
 	gender=tree.xpath('/html/body/form/table/tr/td/table/tr/td/table/tr[3]/td/div/center/table/tr/td[2]/p[7]/text()')
 	location=tree.xpath('/html/body/form/table/tr/td/table/tr/td/table/tr[3]/td/div/center/table/tr/td[2]/comment()')
 
-	try:
-		addrsss=find_address(str(location[0]))
-	except Exception, e:
-		pass
-
 
 	data={}
 	try:
@@ -42,6 +37,12 @@ def fetch(roll_no):
 	except Exception, e:
 		return False
 		data['n']=notavailable
+		
+	try:
+		addrsss=find_address(str(location[0]))
+	except Exception, e:
+		pass
+
 	try:
 		data['p']=program[1].strip()
 	except Exception, e:
