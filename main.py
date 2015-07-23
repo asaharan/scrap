@@ -1,9 +1,7 @@
 from lxml import html
 import requests
 import re
-
 notavailable='Not available'
-
 def find_address(comment):
 	m=re.search('<b>Permanent Address :</b>(.*)India<br>',comment)
 	if not m:
@@ -12,15 +10,16 @@ def find_address(comment):
 	important=interesting.split(',')
 	return {'s':important[len(important)-2],'c':important[len(important)-3]}
 
-def fetch(roll_no):
-	url='http://oa.cc.iitk.ac.in:8181/Oa/Jsp/OAServices/IITk_SrchRes1.jsp?typ=stud&numtxt='+str(roll_no)+'&sbm=Y'
-	print 'Fetching info for %s' % (roll_no)
-	page = requests.get(url)
+def fetch(page):
+	# url='http://oa.cc.iitk.ac.in:8181/Oa/Jsp/OAServices/IITk_SrchRes1.jsp?typ=stud&numtxt='+str(roll_no)+'&sbm=Y'
+	# print 'Fetching info for %s' % (roll_no)
+	# page = requests.get(url)
 
-	page_text=page.text.strip()
+	page_text=page.strip()
 	# html_file.write(page_text)
 	tree = html.fromstring(page_text)
 	#now scrap
+	roll=tree.xpath('/html/body/form/table/tr/td/table/tr/td/table/tr[3]/td/div/center/table/tr/td[2]/text()')
 	name=tree.xpath('/html/body/form/table/tr/td/table/tr/td/table/tr[3]/td/div/center/table/tr/td[2]/p[1]/text()')
 	program=tree.xpath('/html/body/form/table/tr/td/table/tr/td/table/tr[3]/td/div/center/table/tr/td[2]/p[2]/text()')
 	department=tree.xpath('/html/body/form/table/tr/td/table/tr/td/table/tr[3]/td/div/center/table/tr/td[2]/p[3]/text()')
@@ -33,11 +32,17 @@ def fetch(roll_no):
 
 	data={}
 	try:
-		data['n']=name[1].strip()
+		# data['n']=name[1].strip()
+		pass
 	except Exception, e:
 		return False
 		data['n']=notavailable
-		
+
+	try:
+		data['r']=roll[1].strip()
+	except Exception, e:
+		data['r']=notavailable
+
 	try:
 		addrsss=find_address(str(location[0]))
 	except Exception, e:
