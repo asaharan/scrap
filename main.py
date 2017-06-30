@@ -32,7 +32,7 @@ def fetch(page):
 
 	data={}
 	try:
-		# data['n']=name[1].strip()
+		data['n']=name[1].strip()
 		pass
 	except Exception, e:
 		return False

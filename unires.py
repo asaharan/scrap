@@ -8,7 +8,9 @@ jatha=25
 def callme(response):
 	global callbacks
 	global data
-	data.append(main.fetch(response.body))
+	d = main.fetch(response.body)
+	if d!=False:
+		data.append(d)
 	callbacks+=1
 	you_handle()
 
