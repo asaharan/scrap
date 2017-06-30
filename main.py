@@ -3,7 +3,7 @@ import requests
 import re
 notavailable='Not available'
 def find_address(comment):
-	m=re.search('<b>Permanent   :</b>(.*)India<br>',comment)
+	m=re.search('<b>Permanent Address :</b>(.*)India<br>',comment)
 	if not m:
 		return False
 	interesting= m.group(0)[26:-4]
